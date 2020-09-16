@@ -12,11 +12,13 @@ function App() {
       const newMember = { name: n, email: e, roll: r };
       setMemberList([...memberList, newMember]);
     } else {
-      const list = memberList;
-      list[memberToEdit].name = n;
-      list[memberToEdit].email = e;
-      list[memberToEdit].roll = r;
-      setMemberList(list);
+      setMemberList(
+        memberList.map((member, i) =>
+          i === memberToEdit
+            ? { ...member, name: n, email: e, roll: r }
+            : member
+        )
+      );
       setMemberToEdit(null);
     }
   };
