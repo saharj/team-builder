@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button,
+} from "reactstrap";
 import "./App.css";
 
 function Form(props) {
   const [nameVal, setNameVal] = useState("");
   const [emailVal, setEmailVal] = useState("");
   const [rollVal, setRollVal] = useState("");
-  //   const [activeBtn, setActiveBtn] = useState(false);
+  const [activeBtn, setActiveBtn] = useState(false);
 
   const onInputChange = (e) => {
     const target = e.target;
@@ -24,20 +32,57 @@ function Form(props) {
     props.addMember(nameVal, emailVal, rollVal);
   };
 
+  useEffect(() => {
+    if (nameVal.length > 1 && emailVal.length > 1 && rollVal.length > 0) {
+      setActiveBtn(true);
+    } else {
+      setActiveBtn(false);
+    }
+  }, [nameVal, emailVal, rollVal]);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Name:</label>
-      <input type="text" name="name" value={nameVal} onChange={onInputChange} />
-      <label>Email:</label>
+    <form onSubmit={handleSubmit} className="form-horizontal">
+      <div className="form-group mb-2 mt-2 mr-sm-2 mb-sm-0">
+        <label>
+          Name:
+          <input
+            className="form-control"
+            type="text"
+            name="name"
+            value={nameVal}
+            onChange={onInputChange}
+          />
+        </label>
+      </div>
+      <div className="form-group mb-2 mr-sm-2 mb-sm-0">
+        <label>
+          Email:
+          <input
+            className="form-control"
+            type="email"
+            name="email"
+            value={emailVal}
+            onChange={onInputChange}
+          />
+        </label>
+      </div>
+      <div className="form-group mb-2 mr-sm-2 mb-sm-0">
+        <label>
+          Roll:
+          <input
+            className="form-control"
+            type="text"
+            name="roll"
+            value={rollVal}
+            onChange={onInputChange}
+          />
+        </label>
+      </div>
       <input
-        type="email"
-        name="email"
-        value={emailVal}
-        onChange={onInputChange}
+        className={`btn-primary btn ${activeBtn ? "active" : "disabled"}`}
+        type="submit"
+        value="Add"
       />
-      <label>Roll:</label>
-      <input type="text" name="roll" value={rollVal} onChange={onInputChange} />
-      <input type="submit" value="Add" />
     </form>
   );
 }
