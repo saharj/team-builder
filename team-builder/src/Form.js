@@ -1,12 +1,4 @@
 import React, { useState, useEffect } from "react";
-import {
-  Card,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
-} from "reactstrap";
 import "./App.css";
 
 function Form(props) {
@@ -30,6 +22,9 @@ function Form(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.addMember(nameVal, emailVal, rollVal);
+    setNameVal("");
+    setEmailVal("");
+    setRollVal("");
   };
 
   useEffect(() => {

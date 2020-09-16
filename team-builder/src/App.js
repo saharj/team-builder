@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Card, CardText, Col, Row, Container } from "reactstrap";
 import Form from "./Form.js";
 import "./App.css";
 
@@ -12,15 +13,19 @@ function App() {
   return (
     <div className="App">
       <Form addMember={addMember} />
-      <div>
-        {memberList.map((member, i) => (
-          <div key={i}>
-            <p>Name: {member.name}</p>
-            <p>Email: {member.email}</p>
-            <p>Roll: {member.roll}</p>
-          </div>
-        ))}
-      </div>
+      <Container className="m-2">
+        <Row>
+          <Col>
+            {memberList.map((member, i) => (
+              <Card body key={i} style={{ border: "1px solid gray" }}>
+                <CardText>Name: {member.name}</CardText>
+                <CardText>Email: {member.email}</CardText>
+                <CardText>Roll: {member.roll}</CardText>
+              </Card>
+            ))}
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
