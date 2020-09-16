@@ -35,6 +35,14 @@ function Form(props) {
     }
   }, [nameVal, emailVal, rollVal]);
 
+  useEffect(() => {
+    if (props.memberToEdit) {
+      setNameVal(props.memberToEdit.name);
+      setEmailVal(props.memberToEdit.email);
+      setRollVal(props.memberToEdit.roll);
+    }
+  }, [props.memberToEdit]);
+
   return (
     <form onSubmit={handleSubmit} className="form-horizontal">
       <div className="form-group mb-2 mt-2 mr-sm-2 mb-sm-0">
@@ -76,7 +84,7 @@ function Form(props) {
       <input
         className={`btn-primary btn ${activeBtn ? "active" : "disabled"}`}
         type="submit"
-        value="Add"
+        value={props.memberToEdit ? "Update" : "Add"}
       />
     </form>
   );
